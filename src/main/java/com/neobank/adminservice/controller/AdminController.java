@@ -4,6 +4,7 @@ import com.neobank.adminservice.client.CardServiceClient;
 import com.neobank.adminservice.client.TransactionServiceClient;
 import com.neobank.adminservice.client.UserServiceClient;
 import com.neobank.adminservice.dto.CardResponse;
+import com.neobank.adminservice.dto.KycResponse;
 import com.neobank.adminservice.dto.PageResponse;
 import com.neobank.adminservice.dto.TransactionResponse;
 import com.neobank.adminservice.dto.UserResponse;
@@ -42,5 +43,29 @@ public class AdminController {
     @GetMapping("/cards/{id}")
     public ResponseEntity<CardResponse> getCardById(@PathVariable UUID id) {
         return ResponseEntity.ok(cardServiceClient.getCardById(id));
+    }
+
+    @PreAuthorize("hasRole('ADMIN') or hasRole('KYC_MANAGER')")
+    @PostMapping("/kyc/{id}/approve")
+    public ResponseEntity<KycResponse> approveKyc(@PathVariable Long id) {
+        return ResponseEntity.ok(userServiceClient.approveKyc(id));
+    }
+
+    @PreAuthorize("hasRole('ADMIN') or hasRole('KYC_MANAGER')")
+    @PostMapping("/kyc/{id}/reject")
+    public ResponseEntity<KycResponse> rejectKyc(@PathVariable Long id) {
+        return ResponseEntity.ok(userServiceClient.rejectKyc(id));
+    }
+
+    @PreAuthorize("hasRole('ADMIN') or hasRole('SUPPORT')")
+    @PostMapping("/users/{id}/block")
+    public ResponseEntity<UserResponse> blockUser(@PathVariable Long id) {
+        return ResponseEntity.ok(userServiceClient.blockUser(id));
+    }
+
+    @PreAuthorize("hasRole('ADMIN') or hasRole('SUPPORT')")
+    @PostMapping("/users/{id}/unblock")
+    public ResponseEntity<UserResponse> unblockUser(@PathVariable Long id) {
+        return ResponseEntity.ok(userServiceClient.unblockUser(id));
     }
 }

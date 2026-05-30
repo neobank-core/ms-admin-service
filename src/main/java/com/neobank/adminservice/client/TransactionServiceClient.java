@@ -6,14 +6,9 @@ import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
 import java.util.UUID;
 
-@FeignClient(
-        name = "transaction-service",
-        url = "${transaction-service.url}",
-        configuration = FeignConfig.class
-)
+@FeignClient(name = "transaction-service", url = "${transaction-service.url}", configuration = FeignConfig.class)
 @Component
 public interface TransactionServiceClient {
 
