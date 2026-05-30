@@ -1,5 +1,6 @@
 package com.neobank.adminservice.dto;
 
+import java.time.LocalDateTime;
 import java.util.UUID;
 
 public record CardResponse(
@@ -7,6 +8,9 @@ public record CardResponse(
         UUID accountId,
         String cardNumberMasked,
         String cardHolderName,
+        Integer expiryMonth,
+        Integer expiryYear,
         String cardType,
-        String status
+        String cardStatus,
+        LocalDateTime createdAt
 ) {}
