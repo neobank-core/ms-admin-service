@@ -40,6 +40,11 @@ public class AdminController {
         return ResponseEntity.ok(transactionServiceClient.getTransactionById(id));
     }
 
+    @PostMapping("/transactions/{id}/reverse")
+    public ResponseEntity<TransactionResponse> reverseTransaction(@PathVariable UUID id) {
+        return ResponseEntity.ok(transactionServiceClient.reverseTransaction(id));
+    }
+
     @GetMapping("/cards/{id}")
     public ResponseEntity<CardResponse> getCardById(@PathVariable UUID id) {
         return ResponseEntity.ok(cardServiceClient.getCardById(id));

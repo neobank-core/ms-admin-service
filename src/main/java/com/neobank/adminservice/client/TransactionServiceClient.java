@@ -14,4 +14,7 @@ public interface TransactionServiceClient {
 
     @GetMapping("/api/transactions/{id}")
     TransactionResponse getTransactionById(@PathVariable UUID id);
+
+    @PostMapping("/api/transactions/internal/{id}/reverse")
+    TransactionResponse reverseTransaction(@PathVariable UUID id);
 }
