@@ -8,13 +8,17 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.UUID;
 
-@FeignClient(name = "card-service",
-        url = "${card-service.url}",
-        configuration = FeignConfig.class
+@FeignClient(
+        name = "card-service",
+        configuration = FeignConfig.class,
+        fallbackFactory = CardServiceClientFallbackFactory.class
 )
 @Component
 public interface CardServiceClient {
 
     @GetMapping("/api/cards/{id}")
-    CardResponse getCardById(@PathVariable UUID id);
+    CardResponse getCardById(@PathVariable("id") UUID id);
+
+    @GetMapping("/api/internal/cards/user/{userId}")
+    java.util.List<Object> getUserCards(@PathVariable("userId") UUID userId);
 }

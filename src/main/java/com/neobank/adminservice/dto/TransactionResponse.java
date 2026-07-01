@@ -10,5 +10,7 @@ public record TransactionResponse(
         String currency,
         String status,
         String type,
+        UUID senderCardId,
+        UUID receiverCardId,
         LocalDateTime createdAt
 ) {}
